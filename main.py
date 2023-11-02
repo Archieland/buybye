@@ -18,9 +18,10 @@ products = db_client.get_products()
 new_products = list(filter(lambda x: not x in products, candidates))
 db_client.add_products(new_products)
 
-email_client.send_product_info(
-    products=products
-)
+if len(new_products) != len(products): # First time we don't want to send emails
+    email_client.send_product_info(
+        products=products
+    )
 
 
 
