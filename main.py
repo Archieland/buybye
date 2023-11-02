@@ -1,17 +1,17 @@
 from clients import DatabaseClient, EmailClient
 from models import Product, Website
 from parsers import Parser
+from config import URL
 
 # Initialize clients
 db_client = DatabaseClient()
 email_client = EmailClient()
 
 # TODO, add these variables as cmd argument
-website = Website.MYAUTO
-url = ''
+website = Website.detect_type_from_url(URL)
 
 parser = Parser.from_website(website=website)
-candidates = [] # parser.get_products(url)
+candidates = [] # parser.get_products(URL)
 
 products = db_client.get_products()
 
