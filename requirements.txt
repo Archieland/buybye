@@ -1,0 +1,2 @@
+pysqlite3==0.5.2
+sendgrid==6.10.0
