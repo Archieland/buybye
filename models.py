@@ -1,6 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass
-import re
+from config import MYAUTO_URL, MYHOME_URL
 
 @dataclass
 class Product:
@@ -14,11 +14,14 @@ class Product:
 class Website(str, Enum):
     MYAUTO = "myauto"
     MYHOME = "myhome"
-    SS = "ss"
+    SS = "ss.ge"
 
     @staticmethod
     def detect_type_from_url(url :str):
-        website = re.findall('\.(.*)\.', url)[0]
-        if website in (Website.MYAUTO, Website.MYHOME, Website.SS):
-            return website
+        if Website.MYAUTO in url:
+            return Website.MYAUTO, MYAUTO_URL
+        elif Website.MYHOME in url:
+            return Website.MYHOME, MYHOME_URL
+        elif Website.SS in url:
+            return Website.SS, None # TODO
         return None

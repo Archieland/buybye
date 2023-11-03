@@ -4,6 +4,8 @@ from typing import List
 import requests
 from requests import Session
 import json
+import re 
+from bs4 import BeautifulSoup
 
 class Parser:
 
@@ -12,8 +14,7 @@ class Parser:
         if website == Website.MYAUTO:
             return MyAutoParser()
         elif website == Website.MYHOME:
-            # return MyHomeParser()
-            pass
+            return MyHomeParser()
         elif website == Website.SS:
             # return SSParser()
             pass
@@ -45,7 +46,27 @@ class MyAutoParser(Parser):
 class MyHomeParser(Parser):
 
     def get_products(self, url) -> List[Product]:
-        raise NotImplementedError()
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36',
+        }
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        script_tags = soup.find_all('script')
+
+        pattern = re.compile(r'fbPixelData\s*=\s*({.*?});', re.DOTALL)
+        prelink = 'https://www.myhome.ge/ka/pr/'
+
+        for script in script_tags:
+            if script.string:
+                match = pattern.search(script.string)
+                if match:
+                    fb_pixel_data_json = match.group(1)
+                    fb_pixel_data = json.loads(fb_pixel_data_json)
+                    ids = fb_pixel_data.get('content_ids', [])
+                    products = list(map(lambda id: Product(website=Website.MYHOME, url=prelink + id), ids))
+                    return products
+        return None
     
 class SSParser(Parser):
 

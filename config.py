@@ -11,4 +11,7 @@ SENDGRID_EMAIL = config_data.get('SENDGRID_EMAIL')
 EMAILS = config_data.get('EMAILS')
 SENDGRID_API_KEY = config_data.get('SENDGRID_API_KEY')
 
-URL = config_data.get("URL")
+MYAUTO_URL = config_data.get("MYAUTO_URL")
+MYHOME_URL =  config_data.get('MYHOME_URL')
+URL = config_data.get(config_data.get("URL"))
+SEND_EMAIL = config_data.get("SEND_EMAIL")

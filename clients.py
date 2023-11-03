@@ -17,7 +17,7 @@ class EmailClient:
         # Create the body of the message
         body = "Here's the list of products you might be interested in:\n\n"
         for product in products:
-            body += f"Website: {product.website}, URL: {product.url}\n"
+            body += f"Website: {product.website}, URL: {product.url}\n\n"
 
         # Send an email to each recipient
         for email in recipient_emails:
