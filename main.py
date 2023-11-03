@@ -23,6 +23,7 @@ if SEND_EMAIL and len(new_products):
     email_client.send_product_info(
         products=new_products
     )
-
-
-
+if len(new_products):
+    logging.info(f"Found {len(new_products)} new products on {website}")
+else:
+    logging.info("No new products")
