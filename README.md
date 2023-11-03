@@ -24,6 +24,7 @@ Set up the project by creating a `config.json` file in the working directory. Us
     "SENDGRID_EMAIL": "YOUR_SENDGRID_EMAIL",
 
     "DB_PATH": "database.db",
+    "LOGS_PATH" : "LOGS_PATH",
 
     "EMAILS": [
         "recipient1@example.com",
