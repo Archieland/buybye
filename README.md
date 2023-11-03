@@ -40,3 +40,11 @@ conda create -n buybye python==3.10
 pip install -r requirements.txt
 python main.py
 ```
+
+You can use cron to check websites in every n minute.
+```
+crontab -e
+```
+Example of the cron job, in every 10 minutes for conda environment named cheater:
+
+*/10 * * * * /Users/user/anaconda3/envs/cheater/bin/python /Users/user/Desktop/buybye/main.py
