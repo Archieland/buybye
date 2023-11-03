@@ -1,9 +1,9 @@
 from clients import DatabaseClient, EmailClient
 from models import Website
 from parsers import Parser
-from config import URL, SEND_EMAIL
+from config import URL, SEND_EMAIL, LOGS_PATH
 import logging
-logging.basicConfig(filename='logs.log', level=logging.DEBUG, 
+logging.basicConfig(filename=LOGS_PATH, level=logging.DEBUG, 
                     filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
 db_client = DatabaseClient()
